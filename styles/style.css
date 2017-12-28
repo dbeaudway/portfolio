@@ -1,0 +1,62 @@
+html {
+    height:100%;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    background-attachment: fixed;
+}
+
+body {
+    color: rgba(0,0,0,.84);
+    font-family: 'Roboto', sans-serif;
+    margin: 0px;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 300
+}
+
+.segment {
+    background-color: rgba(255,255,255,.8); 
+    margin-top: 100px;
+    padding: 10px 0px;
+    width: 100%;
+    box-shadow: 0px 0px 1px rgba(0,0,0,.64);
+}
+
+.container {
+    padding: 0px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+ul {
+    list-style: none;
+    display: inline-block;
+    padding: 0px;
+}
+
+li {
+    display: inline-block;
+    margin: 0px 10px;
+    padding: 5px 15px;
+    border-radius: 3px;
+    box-shadow: 0px 1px 1px rgba(0,0,0,.64);
+    background-color: rgb(182, 78, 8);
+    color: #FFFFFF;
+}
+
+li:hover {
+    box-shadow: 0px 3px 3px rgba(0,0,0,.64);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#linkedin {
+    background-color: #2876b5;
+}
+
+#github {
+    background-color: #24292e;
+}
