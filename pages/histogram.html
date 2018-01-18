@@ -1,0 +1,428 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Scrollama Demo: Fixed CSS</title>
+    <meta name="description" content="Scrollama Demo: Fixed CSS">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../vendors/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <script src="../scripts/data.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            min-height: 1280px;
+            font-weight: 300;
+            color: #2a2a2a;
+        }
+
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        a {
+            margin: 0;
+            font-weight: 300;
+        }
+
+        a,
+        a:visited,
+        a:hover {
+            color: #f30;
+            text-decoration: none;
+            border-bottom: 1px solid currentColor;
+        }
+
+        #outro {
+            height: 640px;
+        }
+
+        /* scrollama */
+
+        #scroll {
+            position: relative;
+            border-top: 1px dashed #000;
+            border-bottom: 1px dashed #000;
+        }
+
+        .scroll__graphic {
+            position: absolute;
+            top: 0;
+            bottom: auto;
+            background-color: #fff;
+            -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+
+        .scroll__graphic.is-fixed {
+            position: fixed;
+            margin: 0 auto;
+        }
+
+        .scroll__graphic.is-bottom {
+            bottom: 0;
+            top: auto;
+        }
+
+        .chart {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            -moz-transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            background-color: #ddd;
+            border: 1px solid #000;
+        }
+
+        .chart p {
+            text-align: center;
+            padding: 1rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -moz-transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            font-size: 8rem;
+            font-weight: 900;
+            color: #666;
+        }
+
+        .scroll__text {
+            position: relative;
+            padding: 0 1rem;
+            max-width: 30rem;
+            width: 33%;
+        }
+
+        .step {
+            margin: 2rem auto;
+            border: 1px solid #333;
+        }
+
+        .step.is-active {
+            background-color: lightgoldenrodyellow;
+        }
+
+        .step p {
+            text-align: center;
+            padding: 1rem;
+            font-size: 1.5rem;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <section>
+            <h1>Twin Cities Marathon</h1>
+            <p>
+                Analysis of the 2017 Twin Cities Marathon.
+            </p>
+        </section>
+        <section id='scroll'>
+            <div class='scroll__graphic'>
+                <div class='histogram'>
+                </div>
+            </div>
+            <div class='scroll__text'>
+                <div class='step' data-step='1'>
+                    <p>
+                        The Twin Cities Marathon is a 26.2 mile race that starts in downtown Minneapolis, circles many of the cities lakes, continues
+                        along the Mississippi river until reaching the finish line at the State Capitol in St. Paul.
+                    </p>
+                </div>
+                <div class='step' data-step='2'>
+                    <p>In 2017, a total of 7,487 runners completed the course.</p>
+                </div>
+                <div class='step' data-step='3'>
+                    <p>STEP 3</p>
+                </div>
+                <div class='step' data-step='4'>
+                    <p>STEP 4</p>
+                </div>
+            </div>
+        </section>
+        <section id='outro'></section>
+        <div class='debug'></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.2/d3.min.js"></script>
+        <script src='../scripts/scrollama.min.js'></script>
+        <script>
+            // using d3 for convenience
+            var container = d3.select('#scroll');
+            var graphic = container.select('.scroll__graphic');
+            var chart = graphic.select('.chart');
+            var text = container.select('.scroll__text');
+            var step = text.selectAll('.step');
+            // initialize the scrollama
+            var scroller = scrollama();
+            // generic window resize listener event
+            function handleResize() {
+                // 1. update height of step elements
+                var stepHeight = Math.floor(window.innerHeight * 0.75);
+                step.style('height', stepHeight + 'px');
+                // 2. update width/height of graphic element
+                var bodyWidth = d3.select('.container').node().offsetWidth;
+                graphic
+                    .style('width', bodyWidth + 'px')
+                    .style('height', window.innerHeight + 'px');
+                var chartMargin = 32;
+                var textWidth = text.node().offsetWidth;
+                var chartWidth = graphic.node().offsetWidth - textWidth - chartMargin;
+                chart
+                    .style('width', chartWidth + 'px')
+                    .style('height', Math.floor(window.innerHeight / 2) + 'px');
+                // 3. tell scrollama to update new element dimensions
+                scroller.resize();
+            }
+            // scrollama event handlers
+            function handleStepEnter(response) {
+                // response = { element, direction, index }
+                // add color to current step only
+                step.classed('is-active', function (d, i) {
+                    return i === response.index;
+                })
+                // update graphic based on step
+                chart.select('p').text(response.index + 1)
+
+                if (response.index === 1) {
+                svg.selectAll("rect")
+                    .data(bins)
+                    .transition()
+                    .duration(1000)
+                    .attr("fill","black")
+                    .attr("opacity", ".3")
+                    .attr("transform", function (d) {
+                        return "translate(" + x(d.x0) + "," + y(d.length) + ")";
+                    })
+                    .attr("width", function (d) { return x(d.x1) - x(d.x0) - 1; })
+                    .attr("height", function (d) { return height - y(d.length); });
+
+                } else if (response.index === 2) {
+                svg.selectAll("rect")
+                    .data(femalebins)
+                    .transition()
+                    .duration(1000)
+                    .attr("fill","red")
+                    .attr("opacity", ".3")
+                    .attr("transform", function (d) {
+                        return "translate(" + x(d.x0) + "," + y(d.length) + ")";
+                    })
+                    .attr("width", function (d) { return x(d.x1) - x(d.x0) - 1; })
+                    .attr("height", function (d) { return height - y(d.length); });
+
+                } else if (response.index === 3) {
+                svg.selectAll("rect")
+                    .data(malebins)
+                    .transition()
+                    .duration(1000)
+                    .attr("fill","blue")
+                    .attr("opacity", ".3")
+                    .attr("transform", function (d) {
+                        return "translate(" + x(d.x0) + "," + y(d.length) + ")";
+                    })
+                    .attr("width", function (d) { return x(d.x1) - x(d.x0) - 1; })
+                    .attr("height", function (d) { return height - y(d.length); });
+
+
+                } else if (response.index === 4) {
+
+                }
+
+            }
+            function handleContainerEnter(response) {
+                // response = { direction }
+                // sticky the graphic (old school)
+                graphic.classed('is-fixed', true);
+                graphic.classed('is-bottom', false);
+            }
+            function handleContainerExit(response) {
+                // response = { direction }
+                // un-sticky the graphic, and pin to top/bottom of container
+                graphic.classed('is-fixed', false);
+                graphic.classed('is-bottom', response.direction === 'down');
+            }
+            function init() {
+                // 1. force a resize on load to ensure proper dimensions are sent to scrollama
+                handleResize();
+                // 2. setup the scroller passing options
+                // this will also initialize trigger observations
+                // 3. bind scrollama event handlers (this can be chained like below)
+                scroller.setup({
+                    container: '#scroll',
+                    graphic: '.scroll__graphic',
+                    text: '.scroll__text',
+                    step: '.scroll__text .step',
+                    debug: true,
+                })
+                    .onStepEnter(handleStepEnter)
+                    .onContainerEnter(handleContainerEnter)
+                    .onContainerExit(handleContainerExit);
+                // setup resize event
+                window.addEventListener('resize', handleResize);
+            }
+
+            // kick things off
+            init();
+
+
+            //draw histogram
+            
+                let femaleData = marathonResults.children.filter((person) => person.Sex != "M");
+                let maleData = marathonResults.children.filter((person) => person.Sex == "M");
+                let data = marathonResults.children;
+                var margin = { top: 10, right: 30, bottom: 30, left: 40 },
+                    width = 514 - margin.left - margin.right,
+                    height = 372 - margin.top - margin.bottom;
+
+                // parse the date / time
+                var parseTime = d3.timeParse("%H:%M:%S");
+
+                data.forEach(function (d) {
+                    let adjustedTime = d.Time.split(':');
+                    let newTime = new Date();
+                    newTime.setHours(+adjustedTime[0]);
+                    newTime.setMinutes(adjustedTime[1]);
+                    newTime.setSeconds(adjustedTime[2]);
+                    d.newTime = newTime;
+                });
+
+                femaleData.forEach(function (d) {
+                    let adjustedTime = d.Time.split(':');
+                    let newTime = new Date();
+                    newTime.setHours(+adjustedTime[0]);
+                    newTime.setMinutes(adjustedTime[1]);
+                    newTime.setSeconds(adjustedTime[2]);
+                    d.newTime = newTime;
+                });
+
+                maleData.forEach(function (d) {
+                    let adjustedTime = d.Time.split(':');
+                    let newTime = new Date();
+                    newTime.setHours(+adjustedTime[0]);
+                    newTime.setMinutes(adjustedTime[1]);
+                    newTime.setSeconds(adjustedTime[2]);
+                    d.newTime = newTime;
+                });
+
+                // set the ranges
+                var x = d3.scaleTime()
+                    .domain(d3.extent(data, function (d) { return d.newTime }))
+                    .rangeRound([0, width]);
+                var y = d3.scaleLinear()
+                    .range([height, 0]);
+
+                // set the parameters for the histogram
+                var histogram = d3.histogram()
+                    .value(function (d) { return d.newTime; })
+                    .domain(x.domain())
+                    .thresholds(x.ticks(d3.newTime));
+
+                // append the svg object to the body of the page
+                // append a 'group' element to 'svg'
+                // moves the 'group' element to the top left margin
+                var svg = d3.select(".histogram").append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+                // group the data for the bars
+                var bins = histogram(data);
+                var femalebins = histogram(femaleData);
+                var malebins = histogram(maleData);
+
+                // Scale the range of the data in the y domain
+                y.domain([0, d3.max(bins, function (d) { return d.length; })]);
+
+                // append the bar rectangles to the svg element
+                svg.selectAll("rect")
+                    .data(bins)
+                    .enter().append("rect")
+                    .attr("class", "bar")
+                    .attr("fill","black")
+                    .attr("opacity", ".3")
+                    .attr("x", 1)
+                    .attr("transform", function (d) {
+                        return "translate(" + x(d.x0) + "," + y(d.length) + ")";
+                    })
+                    .attr("width", function (d) { return x(d.x1) - x(d.x0) - 1; })
+                    .attr("height", function (d) { return height - y(d.length); });
+                
+                //female data histogram
+                // svg.selectAll("rect-f")
+                //     .data(femalebins)
+                //     .enter().append("rect")
+                //     .attr("class", "bar")
+                //     .attr("fill", "red")
+                //     .attr("opacity", .5)
+                //     .attr("x", 1)
+                //     .attr("transform", function (d) {
+                //         return "translate(" + x(d.x0) + "," + y(d.length) + ")";
+                //     })
+                //     .attr("width", function (d) { return x(d.x1) - x(d.x0) - 1; })
+                //     .attr("height", function (d) { return height - y(d.length); });
+
+                // male data histogram
+                // svg.selectAll("rect-m")
+                //     .data(malebins)
+                //     .enter().append("rect")
+                //     .attr("class", "bar")
+                //     .attr("fill", "blue")
+                //     .attr("opacity", .5)
+                //     .attr("x", 1)
+                //     .attr("transform", function (d) {
+                //         return "translate(" + x(d.x0) + "," + y(d.length) + ")";
+                //     })
+                //     .attr("width", function (d) { return x(d.x1) - x(d.x0) - 1; })
+                //     .attr("height", function (d) { return height - y(d.length); });
+                
+
+                // add the x Axis
+                svg.append("g")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(d3.axisBottom(x)
+                        .tickFormat(d3.timeFormat("%H:%M:%S")));
+
+                // add the y Axis
+                svg.append("g")
+                    .call(d3.axisLeft(y));
+
+                // line for average time
+                svg.append("line")
+                    .attr("x1", 235)
+                    .attr("x2", 235)
+                    .attr('y1', 0)
+                    .attr('y2', height)
+                    .style('stroke-width', 2)
+                    .style('stroke', 'red')
+
+                // text for average time
+                svg.append("text")
+                    .attr("x", 235)
+                    .style("fill", "red")
+                    .text("Average Time: 4:24:06")
+           
+
+        </script>
+    </div>
+</body>
+
+</html>
