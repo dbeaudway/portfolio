@@ -1,0 +1,80 @@
+.container {
+    max-width: 800px;
+    width: 100%;
+}
+
+
+h1:first-of-type {
+    margin-top: 50px;
+    font-weight: 500;
+    font-size: 48px;
+}
+
+h1 {
+    border-bottom: 1px dotted #f1ed15;
+
+}
+
+h2 {
+    color: black;
+    padding: 5px;
+    background-color: #00c2ff;
+    font-weight: 200;
+}
+
+p {
+    font-size: 18px;
+    font-weight: 200;
+}
+
+body {
+    background-image: url(snowing.gif);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    box-shadow: inset 0px 100px 300px 2000px rgba(0,0,0,.6);
+    color: #efefee;
+    font-family: 'Roboto', sans-serif;
+    margin: 0px;
+}
+
+input {
+    border: none;
+    box-shadow: inset 0px 0px 5px rgba(0,0,0,.24);
+    border-radius: 3px;
+    display: block;
+    width: 400px;
+    padding: 5px 10px;
+    margin: 5px 0px;
+    color: black;
+}
+
+button {
+    -webkit-appearance: none;
+    border: none;
+    box-shadow: 1px 1px 5px rgba(0,0,0,.64);
+    padding: 5px 10px;
+    margin: 5px 0px;
+    background-color: rgb(53, 106, 204);
+    border-radius: 3px;
+    color: white;
+}
+
+
+#stats, #monthlystats{
+    margin-top: 100px;
+}
+
+strong {
+    color: #f1ed15;
+    font-size: 22px;
+}
+
+path, line {
+    stroke: #fff;
+}
+
+text {
+    fill: #fff;
+    font-size: 18px;
+}
