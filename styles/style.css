@@ -1,22 +1,102 @@
-html {
-    height:100%;
-    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-    background-attachment: fixed;
-}
 
 body {
+    margin: 0;
     color: rgba(0,0,0,.84);
-    font-family: 'Roboto', sans-serif;
-    margin: 0px;
+    font-family: 'Monoton', cursive;
     background-color: transparent;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
 }
 
 .container {
-    max-width: 800px;
+    max-width: unset !important;
+    display: flex;
+    height: 100vh;
     width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-h1, h2, h3, h4 {
-    font-weight: 300
+.text-block {
+    flex: 1;
+    width: 100%;
+    text-align: center;
+    background-color: black;
+    color: white;
 }
 
+#top {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    transition: all 5000ms linear;
+    font-size: 2vw;
+    line-height:1;
+}
+
+#bottom {
+    line-height:1;
+    transition: all 5000ms linear;
+    font-size: 2vw;
+}
+
+.speck {
+    position: fixed;
+    margin: 0;
+    font-size: 1vw;
+    font-weight: bold;
+    transition: all 5000ms linear;
+}
+
+h1 {
+    margin: 0;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    #top {
+        font-size: 10vw;
+    }
+    
+    #bottom {
+        font-size: 6vw;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    #top {
+        font-size: 6vw;
+    }
+    
+    #bottom {
+        font-size: 6vw;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    #top {
+        font-size: 6vw;
+    }
+    
+    #bottom {
+        font-size: 6vw;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    #top {
+        font-size: 4vw;
+    }
+    
+    #bottom {
+        font-size: 4vw;
+    }
+}
