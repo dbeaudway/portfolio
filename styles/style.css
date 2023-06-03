@@ -1,102 +1,58 @@
-
 body {
-    margin: 0;
-    color: rgba(0,0,0,.84);
-    font-family: 'Monoton', cursive;
-    background-color: transparent;
-    overflow: hidden;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.84);
+  font-family: 'Kaisei Decol', serif;
+  background-color: transparent;
+  overflow: hidden;
+  background: #ece9e6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ffffff, #ece9e6);
+  background: linear-gradient(to right, #ffffff, #ece9e6);
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .container {
-    max-width: unset !important;
-    display: flex;
-    height: 100vh;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  max-width: unset !important;
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.text-block {
-    flex: 1;
-    width: 100%;
-    text-align: center;
-    background-color: black;
-    color: white;
-}
-
-#top {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    transition: all 5000ms linear;
-    font-size: 2vw;
-    line-height:1;
-}
-
-#bottom {
-    line-height:1;
-    transition: all 5000ms linear;
-    font-size: 2vw;
-}
-
-.speck {
-    position: fixed;
-    margin: 0;
-    font-size: 1vw;
-    font-weight: bold;
-    transition: all 5000ms linear;
+.content {
+  text-align: start;
 }
 
 h1 {
-    margin: 0;
+  font-weight: 900;
+  margin: 0;
 }
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-    #top {
-        font-size: 10vw;
-    }
-    
-    #bottom {
-        font-size: 6vw;
-    }
+h2 {
+  font-weight: 400;
+  margin: 0 0 0.5rem 0;
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    #top {
-        font-size: 6vw;
-    }
-    
-    #bottom {
-        font-size: 6vw;
-    }
+a {
+  display: block;
+  text-decoration: none;
+  font-weight: 400;
+  margin: 0.25rem 0 0.25rem 0;
+  color: #000000;
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-    #top {
-        font-size: 6vw;
-    }
-    
-    #bottom {
-        font-size: 6vw;
-    }
+a:hover {
+  color: #999999;
 }
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-    #top {
-        font-size: 4vw;
-    }
-    
-    #bottom {
-        font-size: 4vw;
-    }
+.text-block {
+  flex: 1;
+  width: 100%;
+  text-align: center;
+  background-color: black;
+  color: white;
 }
